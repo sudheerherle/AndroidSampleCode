@@ -1,12 +1,12 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 23
-
+    compileSdkVersion 25
+    buildToolsVersion '26.0.2'
     defaultConfig {
         applicationId "jp.co.aandd.cdltestapp"
-        minSdkVersion 18
-        targetSdkVersion 23
+        minSdkVersion 19
+        targetSdkVersion 21
         versionCode 1
         versionName "1.0"
     }
