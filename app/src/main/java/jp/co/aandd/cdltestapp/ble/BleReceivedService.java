@@ -474,6 +474,7 @@ public class BleReceivedService extends Service {
                 int flag = characteristic.getIntValue(BluetoothGattCharacteristic.FORMAT_UINT8, 0);
                 String flagString = Integer.toBinaryString(flag);
                 int offset=0;
+                String sys="",dia="",pulse = "";
                 for(int index = flagString.length(); 0 < index ; index--) {
                     String key = flagString.substring(index-1 , index);
 
@@ -490,12 +491,16 @@ public class BleReceivedService extends Service {
                         }
                         // Unit
                         offset+=1;
-                        Log.d("SN", "Systolic :"+String.format("%f", characteristic.getFloatValue(BluetoothGattCharacteristic.FORMAT_SFLOAT, offset)));
+                        sys = String.format("%f", characteristic.getFloatValue(BluetoothGattCharacteristic.FORMAT_SFLOAT, offset));
+                        Log.d("SN", "Systolic :"+ sys);
                         offset+=2;
-                        Log.d("SN", "Diastolic :"+String.format("%f", characteristic.getFloatValue(BluetoothGattCharacteristic.FORMAT_SFLOAT, offset)));
+                        dia = String.format("%f", characteristic.getFloatValue(BluetoothGattCharacteristic.FORMAT_SFLOAT, offset));
+                        Log.d("SN", "Diastolic :"+ dia);
                         offset+=2;
-                        Log.d("SN", "Mean Arterial Pressure :"+String.format("%f", characteristic.getFloatValue(BluetoothGattCharacteristic.FORMAT_SFLOAT, offset)));
+                        pulse = String.format("%f", characteristic.getFloatValue(BluetoothGattCharacteristic.FORMAT_SFLOAT, offset));
+                        Log.d("SN", "Mean Arterial Pressure :"+ pulse);
                         offset+=2;
+                        Toast.makeText(BleReceivedService.this, String.format("Sys: %s Dia: %s Pulse: %s",sys,dia,pulse),Toast.LENGTH_LONG).show();
                     }
                     else if(index == flagString.length()-1) {
                         if(key.equals("1")) {
